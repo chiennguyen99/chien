@@ -1,0 +1,5 @@
+hello	chao
+hi	chao
+wellcom	chao
+throws	nem
+blool	mau
