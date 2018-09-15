@@ -9,11 +9,10 @@ public class Word {
     void setExplain(String explain){
         this.explain = explain; 
     }
-    void getSpelling(){
-        System.out.println(Spelling); 
+    String getSpelling(){
+        return Spelling; 
     }
-    void getExplain(){
-        System.out.println(explain); 
+    String getExplain(){
+        return explain; 
     }
-
 }

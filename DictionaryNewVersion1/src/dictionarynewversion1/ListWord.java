@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*; 
 
 public class ListWord {
-    LinkedList<Word> LIST = new LinkedList<>();   
+    private final LinkedList<Word> LIST = new LinkedList<>();   
     void CreatList(){
         MyFile F = new MyFile(); 
         FileReader Fr = null; 
@@ -23,11 +23,57 @@ public class ListWord {
         }
         F.CloseFileReader(Fr,Br);
     }
+    // local sort. 
+    void SwapWord(Word W1, Word W2){
+        Word temp = new Word(); 
+        temp.setSpelling(W1.getSpelling());
+        temp.setExplain(W1.getExplain());
+        W1.setSpelling(W2.getSpelling());
+        W1.setExplain(W2.getExplain()); 
+        W2.setSpelling(temp.getSpelling());
+        W2.setExplain(temp.getExplain());
+    }
+    void ShiftDown(int a, int b){
+        int i = a; 
+        int j = 2*i + 1; 
+        while (j <= b){
+            int k = j + 1; 
+            String S1 = new String(), S2 = new String(); 
+            S1 = LIST.get(k).getSpelling(); 
+            S2 = LIST.get(j).getSpelling(); 
+            int q = S1.compareTo(S2); 
+            if (k <= b && q > 0){
+                j = k; 
+            }
+            S1 = LIST.get(i).getSpelling();
+            S2 = LIST.get(j).getSpelling();
+            q = S1.compareTo(S2); 
+            if (q < 0){
+                SwapWord(LIST.get(i), LIST.get(j));  
+                i = j; 
+                j = 2*i + 1; 
+            }
+            else {
+                break; 
+            }
+        }
+    }
+    void HeapSort(){
+        int k = LIST.size(); 
+        for (int i = k/2 - 1; i >= 0; i--){
+            ShiftDown(i, k-1); 
+        }
+        for (int i = k-1; i >= 1; i--){
+            SwapWord(LIST.get(0), LIST.get(i)); 
+            ShiftDown(0, i-1); 
+        }
+    }
+    // end. 
     void PrintList(){
-        CreatList(); 
+//        CreatList(); 
         for (int i = 0; i < this.LIST.size(); i++){
-            LIST.get(i).getSpelling();
-            LIST.get(i).getExplain(); 
+            System.out.print(LIST.get(i).getSpelling() + " ");
+            System.out.println(LIST.get(i).getExplain());
         }
     }
 }
