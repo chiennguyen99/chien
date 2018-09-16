@@ -1,6 +1,6 @@
 package dictionarynewversion1;
 
-public class Word {
+public class Word implements Comparable<Word> {
     private String Spelling; 
     private String explain; 
     void setSpelling(String Spelling){
@@ -14,5 +14,10 @@ public class Word {
     }
     String getExplain(){
         return explain; 
+    }
+
+    @Override
+    public int compareTo(Word o) {
+        return (Spelling.compareTo(o.Spelling)); 
     }
 }

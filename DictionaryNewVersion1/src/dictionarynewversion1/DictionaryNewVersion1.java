@@ -1,12 +1,11 @@
 package dictionarynewversion1;
 
 import java.io.*;
-
+import java.util.*; 
 public class DictionaryNewVersion1 {
     public static void main(String[] args) throws IOException {
-       ListWord p1 = new ListWord(); 
-       p1.CreatList();
-       p1.HeapSort();
-       p1.PrintList();
-    } 
+       ListWord L = new ListWord(); 
+       L.CreatList();
+       L.PrintList();
+    }
 }

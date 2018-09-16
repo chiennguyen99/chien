@@ -1,23 +1,20 @@
-package dictionarynewversion1;
+package official;
 import java.io.*; 
-//import java.util.*; 
-//import java.util.logging.Level; 
-//import java.util.logging.Logger; 
 public class MyFile {
-    private final String NAMEFILE = "ductt.txt"; 
-    BufferedReader OpenFileReader(FileInputStream Fr1){
+    private final String NAMEFILE = "dictionary.txt"; 
+    BufferedReader OpenFileReader(FileReader Fr1){
         BufferedReader Br = null; 
-        FileInputStream FIS = null; 
+        FileReader Fr = null; 
         try{
-            FIS = new FileInputStream(NAMEFILE);
-            Br = new BufferedReader(new InputStreamReader(FIS, "UTF-8"));            
+            Fr = new FileReader(NAMEFILE); 
+            Br = new BufferedReader(Fr);             
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
-        Fr1 = FIS; 
+        Fr1 = Fr; 
         return Br; 
     }
-    void CloseFileReader(FileInputStream Fr1, BufferedReader Br){
+    void CloseFileReader(FileReader Fr1, BufferedReader Br){
         try{
             if (Br != null){
                 Br.close();
@@ -29,19 +26,19 @@ public class MyFile {
             System.out.println(ex.getMessage()); 
         }
     }
-    BufferedWriter OpenFileWriter(FileOutputStream Fw1){
+    BufferedWriter OpenFileWriter(FileWriter Fw1){
         BufferedWriter Bw = null; 
-        FileOutputStream Fw = null; 
+        FileWriter Fw = null; 
         try{
-            Fw = new FileOutputStream(NAMEFILE); 
-            Bw = new BufferedWriter(new OutputStreamWriter(Fw,"UTF-8"));             
+            Fw = new FileWriter(NAMEFILE); 
+            Bw = new BufferedWriter(Fw);             
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
         Fw1 = Fw; 
         return Bw; 
     }
-    void CloseFileWriter(FileOutputStream Fw1, BufferedWriter Bw){
+    void CloseFileWriter(FileWriter Fw1, BufferedWriter Bw){
         try{
             if (Fw1 != null){
                 Fw1.close();

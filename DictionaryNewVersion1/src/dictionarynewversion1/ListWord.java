@@ -3,10 +3,14 @@ import java.io.*;
 import java.util.*; 
 
 public class ListWord {
-    private final LinkedList<Word> LIST = new LinkedList<>();   
+    private final LinkedList<Word> LIST = new LinkedList<>();
+    
+    private final MyFile F = new MyFile(); 
+    
+    public ListWord() {}
+    
     void CreatList(){
-        MyFile F = new MyFile(); 
-        FileReader Fr = null; 
+        FileInputStream Fr = null; 
         BufferedReader Br = F.OpenFileReader(Fr); 
         try {
            String s1, s2, s3;
@@ -23,54 +27,46 @@ public class ListWord {
         }
         F.CloseFileReader(Fr,Br);
     }
-    // local sort. 
-    void SwapWord(Word W1, Word W2){
-        Word temp = new Word(); 
-        temp.setSpelling(W1.getSpelling());
-        temp.setExplain(W1.getExplain());
-        W1.setSpelling(W2.getSpelling());
-        W1.setExplain(W2.getExplain()); 
-        W2.setSpelling(temp.getSpelling());
-        W2.setExplain(temp.getExplain());
+   
+    void AddWordToList(Word W){
+        LIST.add(W); 
     }
-    void ShiftDown(int a, int b){
-        int i = a; 
-        int j = 2*i + 1; 
-        while (j <= b){
-            int k = j + 1; 
-            String S1 = new String(), S2 = new String(); 
-            S1 = LIST.get(k).getSpelling(); 
-            S2 = LIST.get(j).getSpelling(); 
-            int q = S1.compareTo(S2); 
-            if (k <= b && q > 0){
-                j = k; 
+    
+    void WriteListToFile(){
+        FileOutputStream Fw1 = null; 
+        BufferedWriter Bw = F.OpenFileWriter(Fw1); 
+        try{      
+            for (int i = 0; i < this.LIST.size(); i++) {
+                String s1 = LIST.get(i).getSpelling();
+                String s2 = LIST.get(i).getExplain(); 
+                Bw.write(s1);
+                Bw.write("\t");
+                Bw.write(s2);
+                Bw.newLine();
             }
-            S1 = LIST.get(i).getSpelling();
-            S2 = LIST.get(j).getSpelling();
-            q = S1.compareTo(S2); 
-            if (q < 0){
-                SwapWord(LIST.get(i), LIST.get(j));  
-                i = j; 
-                j = 2*i + 1; 
-            }
-            else {
-                break; 
-            }
+        }catch(IOException ex){
+            System.out.println(ex.getMessage()); 
         }
+        F.CloseFileWriter(Fw1, Bw);
     }
-    void HeapSort(){
-        int k = LIST.size(); 
-        for (int i = k/2 - 1; i >= 0; i--){
-            ShiftDown(i, k-1); 
-        }
-        for (int i = k-1; i >= 1; i--){
-            SwapWord(LIST.get(0), LIST.get(i)); 
-            ShiftDown(0, i-1); 
-        }
+    
+    String ReturnWordSpelling(int i){
+        return LIST.get(i).getSpelling(); 
     }
-    // end. 
+    
+    int ReturnSizeList(){
+        return LIST.size(); 
+    }
+    
+    Word ReturnWordList(int i){
+        return LIST.get(i); 
+    }
+      
+    void Sort(){
+        Collections.sort(LIST);
+    }
+    
     void PrintList(){
-//        CreatList(); 
         for (int i = 0; i < this.LIST.size(); i++){
             System.out.print(LIST.get(i).getSpelling() + " ");
             System.out.println(LIST.get(i).getExplain());
