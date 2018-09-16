@@ -1,8 +1,6 @@
 package dictionarynewversion1;
 import java.io.*; 
-//import java.util.*; 
-//import java.util.logging.Level; 
-//import java.util.logging.Logger; 
+
 public class MyFile {
     private final String NAMEFILE = "ductt.txt"; 
     BufferedReader OpenFileReader(FileInputStream Fr1){
